@@ -34,8 +34,8 @@ class Usuarios(Base):
 
     id_usuario = Column(Integer, primary_key=True, autoincrement=True)
     #FK heredada de la tabla ROLES
-    id_rol = Column(Integer, ForeignKey("ROLES.id_rol"))
-    nombre_usuario = Column(String(150))
+    id_rol = Column(ForeignKey("ROLES.id_rol"))
+    nombre_completo = Column(String(150))
     correo = Column(String(100), unique=True)
     contrasena_hash = Column(String(255))
 
@@ -54,7 +54,7 @@ class Usuarios(Base):
 class Estudiante(Base):
     __tablename__ = "ESTUDIANTES"
     #al ser PK y FK a la vez, en este caso se vincula al estudiante con el usuario correspondiente
-    id_usuario = Column(Integer, ForeignKey("USUARIOS.id_usuario"), primary_key=True)
+    id_usuario = Column(ForeignKey("USUARIOS.id_usuario"), primary_key=True)
     matricula = Column(String(50), unique=True)
     programa_academico = Column(String(100))
 
@@ -67,7 +67,7 @@ class Estudiante(Base):
 class Profesor(Base):
     __tablename__ = "PROFESORES"
 
-    id_usuario = Column(Integer, ForeignKey("USUARIOS.id_usuario"), primary_key=True)
+    id_usuario = Column(ForeignKey("USUARIOS.id_usuario"), primary_key=True)
     departamento = Column(String(100))
 
     usuario = relationship("Usuarios", back_populates="profesor")
@@ -78,7 +78,7 @@ class Profesor(Base):
 class Monitor(Base):
     __tablename__ = "MONITORES"
 
-    id_usuario = Column(Integer, ForeignKey("USUARIOS.id_usuario"), primary_key=True)
+    id_usuario = Column(ForeignKey("USUARIOS.id_usuario"), primary_key=True)
     id_turno = Column(Integer)
 
     usuario = relationship("Usuarios", back_populates="monitor")
@@ -107,7 +107,7 @@ class Recurso(Base):
 class Laboratorios(Base):
     __tablename__ = "LABORATORIOS"
 
-    id_recurso = Column(Integer, ForeignKey("RECURSOS.id_recurso"), primary_key=True)
+    id_recurso = Column(ForeignKey("RECURSOS.id_recurso"), primary_key=True)
     capacidad = Column(Integer)
     software = Column(String(255))
     ubicacion = Column(String(100))
@@ -120,7 +120,7 @@ class Laboratorios(Base):
 class Equipos(Base):
     __tablename__ = "EQUIPOS_PORTATILES"
 
-    id_recurso = Column(Integer, ForeignKey("RECURSOS.id_recurso"), primary_key=True)
+    id_recurso = Column(ForeignKey("RECURSOS.id_recurso"), primary_key=True)
     modelo = Column(String(100))
     sistema_operativo = Column(String(100))
 
@@ -133,8 +133,8 @@ class Reserva(Base):
     __tablename__ = "RESERVAS"
 
     id_reserva = Column(Integer, primary_key=True, autoincrement=True)
-    id_usuario = Column(Integer, ForeignKey("USUARIOS.id_usuario"))
-    id_recurso = Column(Integer, ForeignKey("RECURSOS.id_recurso"))
+    id_usuario = Column(ForeignKey("USUARIOS.id_usuario"))
+    id_recurso = Column(ForeignKey("RECURSOS.id_recurso"))
     fecha_reserva = Column(DateTime)
 
     usuario = relationship("Usuarios", back_populates="reservas")
@@ -147,7 +147,7 @@ class Novedad(Base):
     __tablename__ = "NOVEDADES"
 
     id_novedad = Column(Integer, primary_key=True, autoincrement=True)
-    id_recurso = Column(Integer, ForeignKey("RECURSOS.id_recurso"))
+    id_recurso = Column(ForeignKey("RECURSOS.id_recurso"))
     descripcion = Column(String(255))
     fecha_novedad = Column(DateTime)
 

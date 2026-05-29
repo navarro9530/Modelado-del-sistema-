@@ -34,7 +34,8 @@ class RolService:
         return self.repo.get_by_id(id_rol)
     
     def crear(self, nombre_rol: str) -> Rol:
-        return self.repo.create(nombre_rol=nombre_rol)
+        nuevo_rol = Rol(nombre_rol=nombre_rol)
+        return self.repo.create(nuevo_rol)
     
     def eliminar(self, id_rol: int) -> bool:
         return self.repo.delete(id_rol)
@@ -60,7 +61,7 @@ class UsuarioService:
     def crear(self, id_rol:int, nombre_completo: str, correo: str, password: str) -> Usuarios:
         nuevo_usuario = Usuarios(
             id_rol = id_rol,
-            nombre_usuario = nombre_completo, 
+            nombre_completo = nombre_completo, 
             correo = correo, 
             contrasena_hash = password
         )

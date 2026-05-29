@@ -23,4 +23,3 @@ def test_db_connection():
     print("\nProbando la pruebas pasaron. la DB esta operativa.")
 
 test_db_connection()
-          
