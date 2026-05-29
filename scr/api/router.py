@@ -35,7 +35,7 @@ from scr.api.schemas import (RolCreate,RolResponse,UsuarioCreate,UsuarioResponse
 
 #API Router, que agrupa las rutas 
 #Asigna un versionado a la API, en este caso v1
-router = APIRouter(prefix="/api/v1")
+router = APIRouter()
 
 #Rol
 @router.get("/roles", response_model=List[RolResponse], tags=["Roles"])
